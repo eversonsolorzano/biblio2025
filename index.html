@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Virtual - Gestión de Cursos y Préstamos</title>
+    <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Biblioteca Virtual</h1>
+            <p>Sistema de gestión de cursos y préstamos</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link active" data-target="dashboard">Inicio</a></li>
+                <li><a href="#" class="nav-link" data-target="courses">Cursos</a></li>
+                <li><a href="#" class="nav-link" data-target="loans">Préstamos</a></li>
+                <li><a href="#" class="nav-link" data-target="reports">Reportes</a></li>
+            </ul>
+        </nav>
+        
+        <div id="alertBox" class="alert"></div>
+        
+        <section id="dashboard" class="section active">
+            <h2>Panel Principal</h2>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <p>Total de Cursos</p>
+                    <h3 id="total-courses">0</h3>
+                </div>
+                <div class="stat-card">
+                    <p>Préstamos Activos</p>
+                    <h3 id="active-loans">0</h3>
+                </div>
+                <div class="stat-card">
+                    <p>Préstamos Vencidos</p>
+                    <h3 id="overdue-loans">0</h3>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Préstamos Recientes</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Material</th>
+                            <th>Fecha Préstamo</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-loans">
+                        <tr>
+                            <td colspan="4" style="text-align: center;">No hay préstamos recientes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h3>Cursos Disponibles</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Docente</th>
+                            <th>Duración</th>
+                            <th>Inscritos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="available-courses">
+                        <tr>
+                            <td colspan="4" style="text-align: center;">No hay cursos disponibles</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section id="courses" class="section">
+            <h2>Gestión de Cursos</h2>
+            
+            <form id="course-form">
+                <div class="form-group">
+                    <label for="course-name">Nombre del Curso</label>
+                    <input type="text" id="course-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="course-instructor">Docente</label>
+                    <input type="text" id="course-instructor" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="course-duration">Duración (horas)</label>
+                    <input type="number" id="course-duration" required min="1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="course-description">Descripción</label>
+                    <textarea id="course-description" rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="btn-success">Registrar Curso</button>
+            </form>
+            
+            <h2 style="margin-top: 40px;">Lista de Cursos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Docente</th>
+                        <th>Duración</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="courses-list">
+                    <tr>
+                        <td colspan="4" style="text-align: center;">No hay cursos registrados</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="loans" class="section">
+            <h2>Gestión de Préstamos</h2>
+            
+            <form id="loan-form">
+                <div class="form-group">
+                    <label for="loan-student">Estudiante</label>
+                    <input type="text" id="loan-student" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loan-material">Material Prestado</label>
+                    <input type="text" id="loan-material" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loan-course">Curso Relacionado</label>
+                    <select id="loan-course" required>
+                        <option value="">Seleccione un curso</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loan-date">Fecha de Préstamo</label>
+                    <input type="date" id="loan-date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loan-return">Fecha de Devolución</label>
+                    <input type="date" id="loan-return" required>
+                </div>
+                
+                <button type="submit" class="btn-success">Registrar Préstamo</button>
+            </form>
+            
+            <h2 style="margin-top: 40px;">Lista de Préstamos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Estudiante</th>
+                        <th>Material</th>
+                        <th>Curso</th>
+                        <th>Fecha Préstamo</th>
+                        <th>Fecha Devolución</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="loans-list">
+                    <tr>
+                        <td colspan="7" style="text-align: center;">No hay préstamos registrados</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="reports" class="section">
+            <h2>Reportes y Estadísticas</h2>
+            
+            <div class="card">
+                <h3>Préstamos por Curso</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Cantidad de Préstamos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="loans-by-course">
+                        <tr>
+                            <td colspan="2" style="text-align: center;">No hay datos disponibles</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="card">
+                <h3>Estadísticas de Préstamos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Estadística</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total de Préstamos</td>
+                            <td id="total-loans">0</td>
+                        </tr>
+                        <tr>
+                            <td>Préstamos Activos</td>
+                            <td id="report-active-loans">0</td>
+                        </tr>
+                        <tr>
+                            <td>Préstamos Completados</td>
+                            <td id="completed-loans">0</td>
+                        </tr>
+                        <tr>
+                            <td>Préstamos Vencidos</td>
+                            <td id="report-overdue-loans">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Biblioteca Virtual &copy; 2025 - SOLORZANO CORPUS EVERSON</p>
+        </div>
+    </footer>
+</body>
+</html>
